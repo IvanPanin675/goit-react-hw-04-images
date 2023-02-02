@@ -46,7 +46,7 @@ export function App () {
   //   }
   // }
 
-  const fetchImage = async function() {
+  async function fetchImage () {
     try {
       setLoading(true);
       const data = await searchImage(search, page);
