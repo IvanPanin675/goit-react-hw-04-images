@@ -18,7 +18,7 @@ const ImageGalleryItem = ({ previevImg, largeImageURL, onImageClick }) => {
 export default ImageGalleryItem;
 
 ImageGalleryItem.propTypes = {
-  preview: PropTypes.string.isRequired,
+  previewImg: PropTypes.string,
   largeImageURL: PropTypes.string.isRequired,
   onImageClick: PropTypes.func.isRequired,
 };
