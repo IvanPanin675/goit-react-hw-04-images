@@ -20,24 +20,30 @@ export function App() {
   const [largeImageURL, setLargeImageURL] = useState('');
 
   useEffect(() => {
+    const fetchImage = async () => {
+      try {
+        setLoading(true);
+        const data = await searchImage(search, page);
+        setImages(prevState => [...prevState, ...data.hits]);
+      } catch(error) {console.log(error.message)
+      } finally {
+        setLoading(false);
+      }
+    };
+
     if (search === '') {
       return;
     }
-    setLoading(true);
-    searchImage(search, page)
-      .then(data => {
-        setImages(prevState => [...prevState, ...data.hits]);
-      })
-      .catch(error => console.log(error.message))
-      .finally(setLoading(false));
-    
-  }, [search, page]);
+
+    fetchImage();
+
+  }, [search, page, setLoading, setImages]);
 
   const loadMore = () => {
     setPage(page + 1);
   };
 
-  const searchImages = (searchIm) => {
+  const searchImages = searchIm => {
     setSearch(searchIm);
     setImages([]);
     setPage(1);
